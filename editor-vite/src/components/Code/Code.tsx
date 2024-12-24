@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect} from "react";
 import { HeaderCode } from "../HeaderCode/HeaderCode"; 
 import { CodeEditor } from "../CodeEditor/CodeEditor";
 import mockServer from "../mockserver";
@@ -14,7 +14,7 @@ interface codeProps{
 
 }
 
-function Code({language, answer, handleLanguageChange, isLoading, handleRunCode, code, onChange}: codeProps) {
+function Code({language, handleLanguageChange, isLoading, handleRunCode, code, onChange}: codeProps) {
       
     useEffect(() => {
         mockServer();

@@ -1,4 +1,3 @@
-import React from "react";
 import { HeaderResult } from "../HeaderResult/HeaderResult";
 import { TextResult } from "../TextResult/TextResult";
 

@@ -1,4 +1,4 @@
-import  {  useEffect, useRef } from 'react';
+import  {  useEffect, useRef, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { EditorView } from "@codemirror/view";
@@ -24,7 +24,7 @@ function CodeEditor({
 } : CodeEditorProps ){
 
   const editorRef = useRef<EditorView | null>(null);
-
+  const [heightCodeMirror, setHeightCodeMirror] = useState('500px');
   const handleCodeChange = (value: string) => {
     
     onChange(value);
@@ -35,6 +35,14 @@ function CodeEditor({
     
   }, [initialCode]);
 
+  useEffect(() =>{
+    const elCodeMirror = document.querySelector('.task-text') as HTMLElement | null;
+    if (elCodeMirror) {
+        setHeightCodeMirror ( (elCodeMirror.offsetHeight * 2 / 3) + 'px');
+      } else {
+        setHeightCodeMirror('500px'); 
+      }
+  }, [])
 
 let extensions = [];
   switch (language) {
@@ -48,20 +56,14 @@ let extensions = [];
           extensions = [javascript()]
   }
 
-  const elCodeMirror = document.querySelector('.task-text') as HTMLElement | null;
-  let heigthCodeMirror: string;
-    if (elCodeMirror) {
-      heigthCodeMirror = (elCodeMirror.offsetHeight * 2 / 3) + 'px';
-    } else {
-      heigthCodeMirror =  '500px'; 
-    }
+  
 
   return (
     <div className="code-editor-container h-100">
         <CodeMirror
             value={code}
             theme={theme === 'dracula' ? dracula : undefined}
-            height={heigthCodeMirror}
+            height={heightCodeMirror}
             extensions={extensions}
             onChange={handleCodeChange}
             onUpdate={(update) => {

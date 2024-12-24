@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 interface taskObj{
     id: number;
@@ -15,7 +15,7 @@ interface HeaderTaskProps{
 
 }
 
-function HeaderTask({numberTask = 1, handleTaskChange, tasks}: HeaderTaskProps) {
+function HeaderTask({numberTask = 1, tasks}: HeaderTaskProps) {
 
     //const {state, taskChange} = useContext(TaskContext)
 
@@ -23,7 +23,7 @@ function HeaderTask({numberTask = 1, handleTaskChange, tasks}: HeaderTaskProps) 
         <div className="col-12 p-3">
             <div className="col-6">
                 <select className='form-select' value={numberTask} onChange={()=> {}}>
-                    {tasks.map((el, index) => <option key = {el.id} value={el.id}>{el.name}</option>)}
+                    {tasks.map((el) => <option key = {el.id} value={el.id}>{el.name}</option>)}
                 </select>
         
             </div>

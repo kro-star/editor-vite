@@ -1,23 +1,28 @@
-import React from "react";
+import { useEffect, useState } from "react";
+
 interface textResultProps{
     consoleOutput: string;
 }
 
 function TextResult({consoleOutput = ''}: textResultProps){
 
-    
+  const [heightResultText, setHeightResultText] = useState('100px');
+  
+  useEffect(() => {
     const elTextTask = document.querySelector('.task-text') as HTMLElement | null;
-  let heigthResultText: string;
+
     if (elTextTask) {
-      heigthResultText = (elTextTask.offsetHeight  / 3 - 56 - 16) + 'px';
+      setHeightResultText( (elTextTask.offsetHeight  / 3 - 56 - 16)  + 'px' );
     } else {
-        heigthResultText =  '100px'; 
+        setHeightResultText('100px'); 
     }
+  }, [])
+    
 
     return <div className="row">
         <div className="col-12 h-100">
             
-          <div className="code-console overflow-y-auto" style={{height: `${heigthResultText}`}}>
+          <div className="code-console overflow-y-auto" style={{height: `${heightResultText}`}}>
               <pre>{consoleOutput}</pre>
           </div>
         </div>
