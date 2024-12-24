@@ -1,50 +1,26 @@
-# React + TypeScript + Vite
+# Инструкция по запуску приложения локально.
+1. Сделайте форк репозитория kro-star/editor. Как делать форк можно посмотреть здесь
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2. Откройте свой IDE(например, VS Code), откройте папку, в которую хотите склонировать проект. Введите следующую комманду:
 
-Currently, two official plugins are available:
+## git clone https://github.com/YOUR-USERNAME/editor-vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+YOUR-USERNAME - имя вашего пользователя на github.com
 
-## Expanding the ESLint configuration
+editor-vite - имя клонируемого проекта
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3. Перейдите в корневую директорию склонированного проекта коммандой
 
-- Configure the top-level `parserOptions` property like this:
+## cd editor-vite/editor-vite
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+4. Запустите скрипт, для установки зависимостей
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## npm install -D vite
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+5. Запустите следующий скрипт и после его выполнения вы можете открыть проект в вашем браузере по адресу: [http://localhost:5173/editor-vite](http://localhost:5173/editor-vite) 
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## npm run dev
+
+Используется версия Node.js - 22.12.0.
+
+
