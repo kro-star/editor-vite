@@ -4,8 +4,11 @@ import { javascript } from '@codemirror/lang-javascript';
 import { EditorView } from "@codemirror/view";
 import { dracula } from '@uiw/codemirror-theme-dracula';
 import { python } from '@codemirror/lang-python';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { codeChange } from '../../redux/TaskSlice'
 
 
+/*
 interface CodeEditorProps {
   initialCode?: string;
   onChange: (code: string) => void;
@@ -14,26 +17,24 @@ interface CodeEditorProps {
   code?: string;
   
 }
-function CodeEditor({
-  initialCode = "",
-  onChange,
-  theme = 'dracula',
-  language = 'javaScript',
-  code
-  
-} : CodeEditorProps ){
+*/
+function CodeEditor(){
+  const code = useAppSelector(state => state.tasks.code);
+  const language = useAppSelector(state => state.tasks.language);
+  const dispatch = useAppDispatch();
 
+  const theme = 'dracula';
   const editorRef = useRef<EditorView | null>(null);
   const [heightCodeMirror, setHeightCodeMirror] = useState('500px');
   const handleCodeChange = (value: string) => {
     
-    onChange(value);
+    dispatch(codeChange(value));
  };
 
   useEffect(() => {
-    onChange(initialCode);
+    code && dispatch(codeChange(code));
     
-  }, [initialCode]);
+  }, [code]);
 
   useEffect(() =>{
     const elCodeMirror = document.querySelector('.task-text') as HTMLElement | null;

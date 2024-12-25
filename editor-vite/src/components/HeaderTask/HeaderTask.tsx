@@ -1,29 +1,19 @@
-import React from "react";
 
-interface taskObj{
-    id: number;
-      name: string;
-      description: string;
-      answer: string;
+import { useAppSelector, useAppDispatch } from '../../redux/hooks'
 
-}
+import { taskChange} from "../../redux/TaskSlice"
 
-interface HeaderTaskProps{
-    numberTask: number;
-    handleTaskChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-    tasks: taskObj[];
 
-}
-
-function HeaderTask({numberTask = 1, tasks}: HeaderTaskProps) {
-
-    //const {state, taskChange} = useContext(TaskContext)
+function HeaderTask() {
+     const tasks = useAppSelector(state => state.tasks.tasks )
+      const numberTask = useAppSelector(state => state.tasks.numberTask)
+      const dispatch = useAppDispatch()
 
     return <div className="row bg-gray rounded-top-2">
         <div className="col-12 p-3">
             <div className="col-6">
-                <select className='form-select' value={numberTask} onChange={()=> {}}>
-                    {tasks.map((el) => <option key = {el.id} value={el.id}>{el.name}</option>)}
+                <select className='form-select' value={numberTask} onChange={(e) => dispatch(taskChange(+e.target.value))}>
+                    {tasks && tasks.map((el) => <option key = {el.id} value={el.id}>{el.name}</option>)}
                 </select>
         
             </div>

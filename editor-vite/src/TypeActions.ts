@@ -31,8 +31,6 @@ export type TaskActionType = {
     payload?: TaskAction,
 }
 
-import { TasksState } from './TaskReducer';
-
 export enum ActionType { 
   CHANGE_NUMBER_TASK = "CHANGE_NUMBER_TASK",
   CODE_CHANGE = "CODE_CHANGE",
@@ -70,7 +68,7 @@ interface actionSetLanguage {
 
 interface actionSetTaskText {
     type: ActionType.SET_TASK_TEXT;
-    payload: boolean;
+    payload: string;
 }
 
 interface actionSetInitialState {

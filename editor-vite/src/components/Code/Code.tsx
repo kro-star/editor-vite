@@ -1,8 +1,8 @@
-import React, { useEffect} from "react";
+import { useEffect} from "react";
 import { HeaderCode } from "../HeaderCode/HeaderCode"; 
 import { CodeEditor } from "../CodeEditor/CodeEditor";
 import mockServer from "../mockserver";
-
+/*
 interface codeProps{
   language: string;
   answer: string | number;
@@ -13,8 +13,8 @@ interface codeProps{
   onChange: (value: string) => void;
 
 }
-
-function Code({language, handleLanguageChange, isLoading, handleRunCode, code, onChange}: codeProps) {
+*/
+function Code() {
       
     useEffect(() => {
         mockServer();
@@ -23,12 +23,12 @@ function Code({language, handleLanguageChange, isLoading, handleRunCode, code, o
     
     return <div className="row pt-3  ">
         <div className="col-12">
-            <HeaderCode handleLanguageChange={handleLanguageChange} isLoading={isLoading} language={language} handleRunCode={handleRunCode}/>
+            <HeaderCode />
         </div>
         <div className="col-12 h-100 p-0">
             
             <div>
-              <CodeEditor initialCode={code} onChange={onChange} language={language} code={code} />
+              <CodeEditor  />
             </div>
         </div>
     </div>

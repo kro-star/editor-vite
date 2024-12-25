@@ -1,34 +1,34 @@
-import React, {useState, useEffect} from "react";
+import { useEffect} from "react";
 import { Task } from "./Task/Task";
 import { Code } from "./Code/Code";
 import { Result } from "./Result/Result";
+import { useAppSelector, useAppDispatch } from '../redux/hooks'
+
+import { loadingTask,  textTaskChange} from "../redux/TaskSlice"
 
 function Home (){
-      
-      const [isLoading, setIsLoading] = useState(false);
+  // The `state` arg is correctly typed as `RootState` already
+  const numberTask = useAppSelector(state => state.tasks.numberTask)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (numberTask){
+      textTaskChange(numberTask);
+    }
+  }, [numberTask])
+
+
+  useEffect(() => {
+    dispatch(loadingTask());
+  }, [])
+    /*  const [isLoading, setIsLoading] = useState(false);
       const [consoleOutput, setConsoleOutput] = useState('');
       const [language,setLanguage] = useState('javaScript');
       const [code, setCode] = useState(`//Введите сюда код`);
       const [numberTask, setNumberTask] = useState(0);
     
-      const tasks = [
-        {
-          id: 0,
-          name: 'Задание 1',
-          description: 'Выведи на экран текст: Hello, world!',
-          answer: 'Hello, world!',
-        },
-        {
-          id: 1,
-          name: 'Задание 2',
-          description: 'Есть 2 строки "abc" и "def". \n\r Выведи на экран строку "abcdef" ',
-          answer: 'abcdef'
-        }
-      ]
-    
-    
-      const [answer,setAnswer] = useState<number | string>(tasks[0].answer);
-      const [textTask, setTextTask] = useState(tasks[0].description);
+     // const [answer,setAnswer] = useState<number | string>(tasks[0].answer);
+     // const [textTask, setTextTask] = useState(tasks[0].description);
     
       const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setLanguage(e.target.value);
@@ -48,11 +48,8 @@ function Home (){
         setTextTask(tasks[newNumberTask].description);
       }
     
-      useEffect(() => {
-        handleTextTaskChange(numberTask);
-    
-      }, [numberTask])
-    
+      
+
       const handleRunCode = async () => {
         setIsLoading(true);
         setConsoleOutput('Executing...\n');
@@ -78,17 +75,25 @@ function Home (){
         }
       };
     
-
-
-    return   <main className='row h-100'>
-        
-    <div className='col-12  col-lg-4  ' >
+ <div className='col-12  col-lg-4  ' >
       <Task numberTask={numberTask} handleTaskChange={handleTaskChange} textTask={textTask} tasks={tasks}/>  
 
     </div>
     <div className='col-12  col-lg-8'>
       <Code language={language} answer={answer} handleLanguageChange={handleLanguageChange} handleRunCode={handleRunCode} isLoading={isLoading} code={code} onChange={handleCodeChange}/>  
       <Result consoleOutput={consoleOutput}/>
+    </div>
+
+*/
+    return   <main className='row h-100'>
+        
+    <div className='col-12  col-lg-4  ' >
+      <Task />  
+
+    </div>
+    <div className='col-12  col-lg-8'>
+      <Code />  
+      <Result />
     </div>
 
   

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useAppSelector } from "../../redux/hooks";
 
+/*
 interface textResultProps{
     consoleOutput: string;
 }
-
-function TextResult({consoleOutput = ''}: textResultProps){
+*/
+function TextResult(){
+  const consoleOutput = useAppSelector(store => store.tasks.consoleOutput)
 
   const [heightResultText, setHeightResultText] = useState('100px');
   

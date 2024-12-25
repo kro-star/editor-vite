@@ -1,8 +1,14 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
-import { ActionType, Action } from './TypeActions';
+import { ActionType, Action } from '../TypeActions';
+import { useSelector } from 'react-redux';
+import { TaskSelector } from './TaskSlice';
+
 
 export const runCode = () => {
+    
+      const { code, language, answer } = useSelector(TaskSelector) 
+
     return async (dispatch: Dispatch<Action>) => {
         dispatch({
             type: ActionType.SET_LOADING,

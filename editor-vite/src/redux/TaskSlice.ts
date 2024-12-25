@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import axios from "axios"
-import { AppThunk } from '../../App' 
-import { TasksState } from "../../TaskReducer";
-import { TaskAction } from "../../TypeActions";
+import { TasksState } from "./TaskReducer";
 
 
   
@@ -34,7 +31,7 @@ const initialState: TasksState = {
 }
   
   const taskSlice = createSlice({
-    name: "tasks",
+    name: "task",
     initialState,
     reducers: {
         languageChange(state, { payload }: PayloadAction<string>) {
@@ -51,7 +48,7 @@ const initialState: TasksState = {
         textTaskChange(state, { payload }: PayloadAction<number> ){
             state.textTask = state.tasks[payload].description
         },
-        loadingTask(state){
+        loadingTask: (state) => {
             state.numberTask = 0,
             state.answer = state.tasks[0].answer
             state.textTask = state.tasks[0].description
@@ -59,9 +56,12 @@ const initialState: TasksState = {
     },
   })
   
+  
+
+
   export const {loadingTask, textTaskChange, codeChange, taskChange, languageChange  } = taskSlice.actions
   
   export default taskSlice.reducer
   
-  export const taskSelector = (state: { taskStore: TasksState }) =>
+  export const TaskSelector = (state: { taskStore: TasksState }) =>
     state.taskStore
