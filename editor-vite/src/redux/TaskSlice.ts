@@ -1,10 +1,23 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit"
-import { TasksState } from "./TaskReducer";
 import { fetchRunCode, RunCodeResult } from "./taskAPI";
-import { useAppSelector } from "./hooks";
-import { FetchArgs } from "@reduxjs/toolkit/query";
 
+interface TaskObject{
+  id: number,
+  name: string,
+  description: string,
+  answer: string
+}
+export interface TasksState {
+    isLoading: boolean,
+    consoleOutput: string,
+    language: string,
+    code: string,
+    numberTask: number,
+    tasks: Array<TaskObject>,
+    answer: string,
+    textTask: string,
 
+}
   
 const initialState: TasksState = {
     isLoading: false,
@@ -34,18 +47,8 @@ console.log('Hello, world!')`,
     textTask: ''
 }
 
-interface FetchArgCode{
-  code: string,
-  language: string, 
-  answer: string
-}
-
-
-export const fetchCode = createAsyncThunk<RunCodeResult, string, { state: {tasks: TasksState} }>('tasks/fetchTask', async (code: string, thunkAPI) => {
-  debugger
+export const fetchCode = createAsyncThunk<RunCodeResult, unknown, { state: {tasks: TasksState} }>('tasks/fetchTask', async (_, thunkAPI) => {
   const state = thunkAPI.getState();
-  console.log('fetchCode');
-  
   const response = await fetchRunCode(state.tasks.code, state.tasks.language, state.tasks.answer)
   return response
 })
@@ -60,7 +63,7 @@ export const fetchCode = createAsyncThunk<RunCodeResult, string, { state: {tasks
         taskChange(state, { payload }: PayloadAction<number>) {
             state.numberTask = payload
             state.answer = state.tasks[payload].answer
-          //  state.textTask = state.tasks[payload].description
+            state.textTask = state.tasks[payload].description
         },
         codeChange(state, { payload }: PayloadAction<string>){
             state.code = payload
@@ -85,12 +88,12 @@ export const fetchCode = createAsyncThunk<RunCodeResult, string, { state: {tasks
     extraReducers: (builder) => {
       builder.addCase(fetchCode.pending, (state) => {
            state.isLoading = true;
-           state.consoleOutput = 'Executing...\n';6
+           state.consoleOutput = 'Executing...\n';
            
       });
       builder.addCase(fetchCode.fulfilled, (state, action) => {
-            state.isLoading = false;
-          state.consoleOutput = action.payload.result;
+          state.isLoading = false;
+          state.consoleOutput = action.payload.result + '\n' + action.payload.status;
       });
       builder.addCase(fetchCode.rejected, (state, action) => {
             state.isLoading = false;

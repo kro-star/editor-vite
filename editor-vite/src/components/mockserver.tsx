@@ -32,10 +32,9 @@ const checkSolution: (input: solutionInput) => solutionOutput = ({ code, languag
     let startPrint = -1;
     let i = 0;
     let newCode = code;
-    let step = 0;
+    let step = 0
     if (language === 'python'){
-        startPrint = code.indexOf('print(')
-        console.log('startPrint=', startPrint)        
+        startPrint = code.indexOf('print(')      
         step = 6;        
     }
     if (language === 'javaScript')
@@ -50,16 +49,13 @@ const checkSolution: (input: solutionInput) => solutionOutput = ({ code, languag
         newCode = newCode + '\n let x' + i + '=' + code.substring(startPrint+step, endPrint) + '\n x' + i;
         code = code.substring(endPrint + 1);
     } 
-        
     let output = eval(newCode);
-    
     if (output === answer){
         statusOutput = 'Success';
     } else{
         statusOutput = 'Error';
     }
     
-
     return {
         status: statusOutput,
         output: output
@@ -76,8 +72,7 @@ const mockServer = () => {
         if (req.method === 'POST' && req.url === '/execute') {
             const { code, language, answer } = JSON.parse(req.body)
             const output = await processCode(code, language, answer);
-
-          return  new Response(JSON.stringify(output), { status: 200, headers: { 'Content-Type': 'application/json' }})
+            return new Response(JSON.stringify(output), { status: 200, headers: { 'Content-Type': 'application/json' }})
         }
 
        return new Response('Not found', { status: 404 })

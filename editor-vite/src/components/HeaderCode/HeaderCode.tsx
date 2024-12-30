@@ -15,7 +15,7 @@ function HeaderCode(){
         <div className="row bg-gray p-3  rounded-top-2">
             <div className="col-6">
                 <select className='form-select' value={language} onChange={(e) => dispatch(languageChange(e.target.value))}>
-                    <option value="javascript">JavaScript</option>
+                    <option value="javaScript">JavaScript</option>
                     <option value="python">Python</option>
                 </select>
         
