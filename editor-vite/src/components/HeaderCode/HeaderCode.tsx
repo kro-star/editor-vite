@@ -1,24 +1,15 @@
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { languageChange } from '../../redux/TaskSlice';
-/*
-interface HeaderCodeProps{
-    handleLanguageChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-    language: string;
-    handleRunCode: () => void;
-    isLoading: boolean
-}*/
+import { languageChange, fetchCode } from '../../redux/TaskSlice';
+
 function HeaderCode(){
     const language = useAppSelector(state => state.tasks.language)
-    //const isLoading = useAppSelector(state => state?.isLoading)
+    const isLoading = useAppSelector(state => state.tasks.isLoading)
+    const code = useAppSelector(state => state.tasks.code)
     const dispatch = useAppDispatch();
 
-
-    /* <div className="col-6 d-flex justify-content-end">            
-                <button className='btn btn-primary'onClick={handleRunCode} disabled={isLoading}>
-                    {isLoading ? 'Process...' : 'Run'}
-                </button>
-            </div>
-             */
+    const handleRunCode = async () => {
+        dispatch(fetchCode(code));
+      };
 
     return  <div className="editor-toolbar">
         <div className="row bg-gray p-3  rounded-top-2">
@@ -29,6 +20,12 @@ function HeaderCode(){
                 </select>
         
             </div>
+            <div className="col-6 d-flex justify-content-end">            
+                <button className='btn btn-primary'onClick={handleRunCode} disabled={isLoading}>
+                    {isLoading ? 'Process...' : 'Run'}
+                </button>
+            </div>
+
            
         </div>
     </div>
