@@ -1,4 +1,5 @@
 ## Демо приложения
+Осторожно! сайт использует Redux Toolkit
 
 Можно посмотреть [здесь](https://kro-star.github.io/editor-vite/)
 
